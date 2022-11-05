@@ -1,17 +1,20 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("__task1__");
-        p1("nwqnw", 2);
+        Scanner scan = new Scanner(System.in);
+        System.out.println("__task1__ . введите строку и число ..  ");
+        System.out.println(p1(scan.nextLine(), scan.nextInt()));
         System.out.println("__task2__");
         int[] mas;
         mas = new int[5];
-        p2(mas);
+        mas = new int[] {1,2,3,4,2};
+        System.out.println(p2(mas));
         System.out.println("__task3__");
-        p3(mas);
+        System.out.println(p3(mas));
+        System.out.println("__task4__");
         p4(mas);
         p5("11.2311");
         p6(14);
@@ -20,45 +23,32 @@ public class Main {
         System.out.println(IsPrefix("wwwsasd", "asd"));
         System.out.println(IsSuffix("wqeqdf","wqe"));
         System.out.println(p10(3));
-
+        scan.close();
     }
 
     public static String p1(String str, int num) {
-
+        StringBuilder s = new StringBuilder();
         for (int j = 0; j < str.length(); j++) {
+
             for (int i = 0; i < num; i++) {
-                System.out.print(str.charAt(j));
+                s.append(str.charAt(j));
             }
         }
-        String res = "___";
-        return res;
+        return s.toString();
     }
 
-    public static void p2(int[] mas) {
-        mas = new int[5];
-        mas[0] = 1;
-        mas[1] = 2;
-        mas[2] = 3;
-        mas[3] = 1;
-        mas[4] = 11;
-        System.out.print(Arrays.stream(mas).min());
-        System.out.println(Arrays.stream(mas).max());
-        p5("11.2");
+    public static int p2(int[] mas) {
+        return Math.abs(Arrays.stream(mas).min().getAsInt()-Arrays.stream(mas).max().getAsInt());
     }
 
     public static boolean p3(int[] mas) {
-        mas = new int[5];
-        mas[0] = 1;
-        mas[1] = 2;
-        mas[2] = 3;
-        mas[3] = 1;
-        mas[4] = 13;
+        mas = new int[]{1,2,3,2,1};
         int sum = 0;
         for (int i = 0; i < mas.length; i++) {
             sum = sum + mas[i];
 
         }
-        if ((sum) % 5 == 0) {
+        if ((sum) % mas.length == 0) {
             System.out.println("true");
             return true;
         } else {
@@ -68,19 +58,12 @@ public class Main {
     }
 
     public static int[] p4(int[] mas) {
-        mas = new int[5];
-        mas[0] = 4;
-        mas[1] = 1;
-        mas[2] = 2;
-        mas[3] = 7;
-        mas[4] = 1;
+        mas = new int[]{4,1,2,6,1};
         int[] mas2;
         mas2 = new int[5];
-        mas2[0] = 4;
-        mas2[1] = mas[0] + mas[1];
-        mas2[2] = mas2[1] + mas[2];
-        mas2[3] = mas2[2] + mas[3];
-        mas2[4] = mas2[3] + mas[4];
+        mas2[0] = mas[0];
+        for (int i = 0; i<mas.length;i++)
+        mas2[i] = mas2[i-1]+mas[i];
         for (int n = 0; n < mas2.length; n++) {
             System.out.println(Array.get(mas2, n));
 
@@ -91,10 +74,10 @@ public class Main {
 
     public static int p5(String str) {
         int res;
-        String ch = ".";
+        char ch = '.';
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ch.charAt(0)) {
-                System.out.println(res=str.length()-(i+1));
+            if (str.charAt(i) == ch) {
+                res=str.length()-(i+1);
                 return res;
 
             }
@@ -116,7 +99,7 @@ public class Main {
     public static boolean p7(String ind)
     {
         System.out.println("__task7__");
-        if (ind.length()!=5){System.out.println("false");return false;}
+        if (ind.length()>5){System.out.println("false");return false;}
         for (int i = 0; i<ind.length();i++)
         {
             if (Character.isDigit(ind.charAt(i))){}
